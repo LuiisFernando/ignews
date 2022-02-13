@@ -1,3 +1,4 @@
+import { SiginInGoogleButton } from '../SiginInGoogleButton';
 import { SignInButton } from '../SignInButton';
 import styles from './styles.module.scss';
 
@@ -11,7 +12,8 @@ export function Header() {
                     <a href="">Posts</a>
                 </nav>
 
-                <SignInButton />
+                {/* <SignInButton /> */}
+                <SiginInGoogleButton />
             </div>
         </header>
     );

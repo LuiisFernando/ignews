@@ -33,6 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         if (!customerId) {
             const stripeCustomer = await stripe.customers.create({
+                name: session.user.name,
                 email: session.user.email,
             });
 
