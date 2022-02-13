@@ -3,7 +3,8 @@ import Head from 'next/head';
 import { stripe } from '../services/stripe';
 import { SubscribeButton } from '../components/SubscribeButton';
 
-import styles from './homde.module.scss';
+import styles from './home.module.scss';
+import { api } from '../services/api';
 
 interface HomeProps {
   product: {
@@ -37,6 +38,10 @@ export default function Home({ product }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve('price_1KIlOsJXivPvqZHWG5Y2u8aP');
+
+  // const teste = await api.get('auth/authorize');
+
+  // console.log(teste.data);
 
   const product = {
     priceId: price.id,

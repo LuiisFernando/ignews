@@ -1,8 +1,10 @@
 import { query as q } from 'faunadb';
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
-
+import CredentialsProvider from "next-auth/providers/credentials";
+import { } from 'next-auth'
 import { fauna } from '../../../services/fauna';
+import { externalApi } from '../../../services/externalApi';
 
 export default NextAuth({
   providers: [
@@ -10,7 +12,31 @@ export default NextAuth({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      name: "nodeCredential",
+      credentials: {
+        username: { label: "Usuário", type: "text", placeholder: "" },
+        password: { label: "Senha", type: "password" }
+      },
+      async authorize(credential, req) {
+        console.log('caiu caqui', req.body);
+
+
+        const response = await externalApi.post('/auth', { credential });
+
+        const { user } = response.data;
+
+        if (user) {
+          return user;
+        } else {
+          return null;
+        }
+      }
+    })
   ],
+  theme: {
+    colorScheme: 'light'
+  },
   callbacks: {
     async signIn({ user, account, profile }) {
 
@@ -47,5 +73,15 @@ export default NextAuth({
     async redirect({ url, baseUrl }) {
       return baseUrl
     },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      console.log('token >>>', token);
+      console.log('user >>>', user);
+      token.userRole = "admin"
+
+      return token
+    }
+  },
+  pages: {
+    signIn: '/signin',
   }
 })
