@@ -1,7 +1,7 @@
 
 import { useSession, getSession } from "next-auth/react"
 
-export default function AdminTeste() {
+export default function Admin() {
   const { data: session } = useSession()
 
   if (session) {

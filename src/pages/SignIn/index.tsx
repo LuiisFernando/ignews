@@ -7,9 +7,6 @@ export default function SignIn({ providers, csrfToken }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  console.log(providers)
-  console.log(csrfToken)
-
   async function handleSignIn(e) {
     e.preventDefault();
     try {
@@ -69,7 +66,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       Location: '/'
     });
     res.end();
-    return;
+    return {
+      props: {}
+    };
   }
 
   var providers = await getProviders();
