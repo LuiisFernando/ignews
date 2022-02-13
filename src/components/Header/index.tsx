@@ -12,8 +12,8 @@ export function Header() {
                     <a href="">Posts</a>
                 </nav>
 
-                {/* <SignInButton /> */}
-                <SiginInGoogleButton />
+                <SignInButton />
+                {/* <SiginInGoogleButton /> */}
             </div>
         </header>
     );
