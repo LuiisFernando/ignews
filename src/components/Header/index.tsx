@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 export function Header() {
     const router = useRouter()
     const rota = router.pathname.replace('/', '');
+    console.log(rota)
     return (
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>

@@ -71,15 +71,19 @@ export default NextAuth({
       }
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl
+      return Promise.resolve(baseUrl);
+
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       token.userRole = "admin"
 
       return token
-    }
+    },
+    async session({ session, user, token }) {
+      return session
+    },
   },
   pages: {
-    signIn: '/signin',
+    // signIn: '/signin',
   }
 })

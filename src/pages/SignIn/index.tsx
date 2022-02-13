@@ -26,7 +26,6 @@ export default function SignIn({ providers, csrfToken }) {
     <>
       {
         Object['values'](providers).map((provider: any, index) => {
-          debugger
           return (
             provider.id === 'credentials' ? (
               <div key={index}>
@@ -47,7 +46,7 @@ export default function SignIn({ providers, csrfToken }) {
                 </form>
               </div>
             ) : (
-              <button onClick={() => signIn('github')}>logar com git</button>
+              <button key={index} onClick={() => signIn('github')}>logar com git</button>
             )
           );
         })
