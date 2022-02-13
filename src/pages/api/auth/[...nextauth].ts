@@ -74,8 +74,6 @@ export default NextAuth({
       return baseUrl
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log('token >>>', token);
-      console.log('user >>>', user);
       token.userRole = "admin"
 
       return token
