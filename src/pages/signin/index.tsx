@@ -55,7 +55,7 @@ export default function SignIn({ providers, csrfToken }) {
                     </button>
                   )}
                   {provider.id === 'google' && (
-                    <button className={styles.signInButton} onClick={() => signIn('github')}>
+                    <button className={styles.signInButton} onClick={() => signIn('google')}>
                       <BsGoogle color="#eba415" />
                       Sign In with Google
                     </button>
