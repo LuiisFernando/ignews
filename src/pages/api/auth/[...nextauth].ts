@@ -39,11 +39,6 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         url: "https://ignews-gamma-blue.vercel.app/api/auth/callback/google",
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code"
-        }
       }
     }),
   ],
