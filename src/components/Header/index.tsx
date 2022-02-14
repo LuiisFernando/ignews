@@ -17,9 +17,6 @@ export function Header() {
                     <Link href="/posts">
                         <a className={rota === '/posts' ? styles.active : ''}>Posts</a>
                     </Link>
-                    <Link href="/signin">
-                        <a className={rota === 'signin' ? styles.active : ''}>Login</a>
-                    </Link>
                 </nav>
 
                 <SignInButton />

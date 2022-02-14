@@ -2,16 +2,13 @@ import { query as q } from 'faunadb';
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials";
-import { } from 'next-auth'
+import GoogleProvider from "next-auth/providers/google";
+
 import { fauna } from '../../../services/fauna';
 import { externalApi } from '../../../services/externalApi';
 
 export default NextAuth({
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    }),
     CredentialsProvider({
       name: "nodeCredential",
       credentials: {
@@ -32,7 +29,15 @@ export default NextAuth({
           return null;
         }
       }
-    })
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
   theme: {
     colorScheme: 'light'

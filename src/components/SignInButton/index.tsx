@@ -1,4 +1,5 @@
-import { FaGithub } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { FaGithub, FaSignInAlt } from 'react-icons/fa';
 import { FiX } from 'react-icons/fi';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -6,6 +7,8 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import styles from './styles.module.scss';
 
 export function SignInButton() {
+    const router = useRouter();
+
     const { data: session } = useSession();
 
     return session ? (
@@ -22,10 +25,10 @@ export function SignInButton() {
         <button
             type="button"
             className={styles.signInButton}
-            onClick={() => signIn('github')}
+            onClick={() => router.push('/signin')}
         >
-            <FaGithub color="#eba415" />
-            Sign in with Github
+            <FaSignInAlt color="#eba415" />
+            Sign in
         </button>
     )
 }
