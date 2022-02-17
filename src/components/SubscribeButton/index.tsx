@@ -1,4 +1,7 @@
 import { useSession, signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+
 import { api } from '../../services/api';
 import { getStripeJs } from '../../services/stripe-js';
 import styles from './styles.module.scss';
@@ -10,10 +13,12 @@ interface SubscrieButtonProps {
 export function SubscribeButton({ priceId }: SubscrieButtonProps) {
 
     const { data: session } = useSession();
+    const router = useRouter();
+
 
     async function handleSubscribe() {
         if (!session) {
-            signIn('github');
+            toast.warning('Para fazer o subscribe é necessário fazer o login primeiro.');
             return;
         }
 

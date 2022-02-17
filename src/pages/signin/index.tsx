@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { NextPageContext, GetServerSideProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { FaGithub } from 'react-icons/fa';
 import { BsGoogle } from 'react-icons/bs';
+import { AiFillLock } from 'react-icons/ai';
+
 
 import { getProviders, signIn, getSession, getCsrfToken, } from 'next-auth/react';
 
@@ -10,6 +12,10 @@ import styles from './signin.module.scss';
 export default function SignIn({ providers, csrfToken }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { google, github, credentials } = providers;
+
+  console.log(github);
 
   async function handleSignIn(e) {
     e.preventDefault();
@@ -24,51 +30,46 @@ export default function SignIn({ providers, csrfToken }) {
   }
 
   return (
-    <>
-      <div className={styles.signinContainer}>
-        {
-          Object['values'](providers).map((provider: any, index) => {
-            return (
-              <div key={index}>
-                {provider.id === 'credentials' && (
-                  <form onSubmit={handleSignIn} >
-                    <div className='form-container'>
-                      <div className='control'>
-                        <input type='text' name='username' value={username} onChange={(e) => setUsername(e.target.value)} />
-                      </div>
-                      <div className='control'>
-                        <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                      </div>
-                      <div className='button-container'>
-                        <button type='submit' className={styles.signInButton} >
-                          Login with E-mail
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                )}
-                <div className={styles.buttonsContainer}>
-                  {provider.id === 'github' && (
-                    <button className={styles.signInButton} onClick={() => signIn('github')}>
-                      <FaGithub color="#eba415" />
-                      Sign In with GitHub
-                    </button>
-                  )}
-                  {provider.id === 'google' && (
-                    <button className={styles.signInButton} onClick={() => signIn('google')}>
-                      <BsGoogle color="#eba415" />
-                      Sign In with Google
-                    </button>
-                  )}
-                </div>
-              </div>
-            );
-          })
-        }
+    <div className={styles.signinContainer}>
+      <div className={styles.signinForm}>
+        <form onSubmit={handleSignIn} >
+          <input
+            type='text'
+            autoComplete='off'
+            name='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="username"
+          />
+          <input
+            type='password'
+            name='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
+          />
+          <button type='submit' className={styles.signInButton} >
+            <AiFillLock color="#eba415" />
+            Login with E-mail
+          </button>
+        </form>
+
+        <div className={styles.buttonsContainer}>
+          {google && (
+            <button className={styles.signInButton} onClick={() => signIn('google')}>
+              <BsGoogle color="#eba415" />
+              Sign In with Google
+            </button>
+          )}
+          {github && (
+            <button className={styles.signInButton} onClick={() => signIn('github')}>
+              <FaGithub color="#eba415" />
+              Sign In with GitHub
+            </button>
+          )}
+        </div>
       </div>
-    </>
-
-
+    </div>
   );
 }
 

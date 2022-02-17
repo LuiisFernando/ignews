@@ -1,13 +1,56 @@
 .signinContainer {
-  width: 540px;
-  margin: 0 auto;
+  width: 100%;
+  height: calc(100vh - 5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: center;
+  margin-top: 10rem;
   
 
   form {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0 90px;
+
+    input {
+      width: 100%;
+      padding: 0 1rem;
+      height: 55px;
+      border-radius: 0.25rem;
+      border: 1px solid #d7d7d7;
+      font-size: 1rem;
+      outline: none;
+
+      transition: background 0.2s;
+
+      &::placeholder {
+          color: var(text-body);
+      }
+
+      &:focus {
+        background: #e7e9ee;
+      }
+      // todo input q tem um input antes
+      & + input {
+          margin-top: 10px;
+      }
+    }
+
+    button {
+      margin-top: 20px;
+    }
   }
+}
+
+.signinForm {
+  width: 100%;
+  max-width: 600px;
+  background: #FFF;
+  padding: 3rem 0;
+  border-radius: 5px;
 }
 
 .signInButton {
@@ -43,5 +86,13 @@
 }
 
 .buttonsContainer {
-  margin-top: 10px;
+  margin-top: 30px;
+  display:flex;
+  justify-content: center;
+
+  button {
+    & + button {
+      margin-left: 10px;
+    }
+  }
 }

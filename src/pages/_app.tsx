@@ -2,6 +2,9 @@ import { AppProps } from 'next/app';
 import { Header } from '../components/Header';
 import { SessionProvider } from "next-auth/react"
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import '../styles/global.scss';
 
 function MyApp({
@@ -11,6 +14,7 @@ function MyApp({
   return (
     <SessionProvider session={session}>
       <Header />
+      <ToastContainer />
       <Component {...pageProps} />
     </SessionProvider>
   )

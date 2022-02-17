@@ -51,11 +51,6 @@ export default NextAuth({
   },
   callbacks: {
     async signIn({ user, account, profile }) {
-      // if (account.provider === "google") {
-      //   console.log('google')
-      //   return profile.email_verified && profile.email.endsWith("@example.com")
-      // }
-
       const { email, name } = user;
 
       try {
