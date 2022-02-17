@@ -37,6 +37,7 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      accessTokenUrl: "https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code",
       authorization: {
         url: "https://ignews-gamma-blue.vercel.app/api/auth/callback/google",
       }
