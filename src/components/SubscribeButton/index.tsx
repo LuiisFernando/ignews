@@ -1,5 +1,4 @@
 import { useSession, signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 import { api } from '../../services/api';
@@ -13,7 +12,6 @@ interface SubscrieButtonProps {
 export function SubscribeButton({ priceId }: SubscrieButtonProps) {
 
     const { data: session } = useSession();
-    const router = useRouter();
 
 
     async function handleSubscribe() {

@@ -15,8 +15,6 @@ export default function SignIn({ providers, csrfToken }) {
 
   const { google, github, credentials } = providers;
 
-  console.log(github);
-
   async function handleSignIn(e) {
     e.preventDefault();
     try {

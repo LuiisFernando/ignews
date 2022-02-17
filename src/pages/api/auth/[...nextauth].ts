@@ -16,9 +16,6 @@ export default NextAuth({
         password: { label: "Senha", type: "password" }
       },
       async authorize(credential, req) {
-        console.log('caiu caqui', req.body);
-
-
         const response = await externalApi.post('/auth', { credential });
 
         const { user } = response.data;
