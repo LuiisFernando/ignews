@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GetServerSideProps, GetStaticProps, GetServerSidePropsContext } from 'next';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaFacebookF } from 'react-icons/fa';
 import { BsGoogle } from 'react-icons/bs';
 import { AiFillLock } from 'react-icons/ai';
 
@@ -13,7 +13,7 @@ export default function SignIn({ providers, csrfToken }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { google, github, credentials } = providers;
+  const { google, github, credentials, facebook } = providers;
 
   async function handleSignIn(e) {
     e.preventDefault();
@@ -63,6 +63,12 @@ export default function SignIn({ providers, csrfToken }) {
             <button className={styles.signInButton} onClick={() => signIn('github')}>
               <FaGithub color="#eba415" />
               Sign In with GitHub
+            </button>
+          )}
+          {facebook && (
+            <button className={styles.signInButton} onClick={() => signIn('facebook')}>
+              <FaFacebookF color="#eba415" />
+              Sign In with Facebook
             </button>
           )}
         </div>
