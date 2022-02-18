@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticProps, GetServerSidePropsContext } from 'next';
 import { FaGithub } from 'react-icons/fa';
 import { BsGoogle } from 'react-icons/bs';
 import { AiFillLock } from 'react-icons/ai';
@@ -72,7 +72,7 @@ export default function SignIn({ providers, csrfToken }) {
 }
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps = async (context) => {
 
   const { req, res } = context;
   const session = await getSession({ req });
@@ -95,7 +95,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       session: null,
       providers,
-      csrfToken
-    }
+      csrfToken,
+    },
+    revalidate: 60 * 60 * 24
   }
 }
