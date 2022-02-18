@@ -44,3 +44,14 @@
     }
 
 }
+
+
+@media (max-width: 720px) {
+    .contentContainer {
+        flex-direction: column;
+
+        img {
+            margin-top: 50px;
+        }
+    }
+}
