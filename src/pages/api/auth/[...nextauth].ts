@@ -55,7 +55,7 @@ export default NextAuth({
     async signIn({ user, account, profile }) {
       const { email, name } = user;
       const { provider } = account;
-
+      user.provider = provider;
       try {
         await fauna.query(
           q.If(
@@ -94,6 +94,7 @@ export default NextAuth({
       return token
     },
     async session({ session, user, token }) {
+      session.token = token;
       return session
     },
   },

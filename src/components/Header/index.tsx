@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 export function Header() {
     const router = useRouter()
     const rota = router.pathname.replace('/', '');
+
     return (
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
@@ -15,7 +16,7 @@ export function Header() {
                         <a className={rota === '' ? styles.active : ''} href="">Home</a>
                     </Link>
                     <Link href="/posts">
-                        <a className={rota === '/posts' ? styles.active : ''}>Posts</a>
+                        <a className={rota === 'posts' ? styles.active : ''}>Posts</a>
                     </Link>
                 </nav>
 
