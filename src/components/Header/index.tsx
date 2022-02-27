@@ -1,23 +1,19 @@
-import Link from 'next/link';
 import { SignInButton } from '../SignInButton';
 import styles from './styles.module.scss';
-import { useRouter } from 'next/router'
+import { ActiveLink } from '../ActiveLink';
 
 export function Header() {
-    const router = useRouter()
-    const rota = router.pathname.replace('/', '');
-
     return (
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
                 <img src="/images/logo.svg" alt="ig.news" />
                 <nav>
-                    <Link href="/">
-                        <a className={rota === '' ? styles.active : ''} href="">Home</a>
-                    </Link>
-                    <Link href="/posts">
-                        <a className={rota === 'posts' ? styles.active : ''}>Posts</a>
-                    </Link>
+                    <ActiveLink activeClassName={styles.active} href="/" prefetch>
+                        <a>Home</a>
+                    </ActiveLink>
+                    <ActiveLink activeClassName={styles.active} href="/posts" prefetch>
+                        <a>Posts</a>
+                    </ActiveLink>
                 </nav>
 
                 <SignInButton />
