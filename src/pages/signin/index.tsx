@@ -77,7 +77,7 @@ export default function SignIn({ providers, csrfToken }) {
           {facebook && (
             <button className={styles.signInButton} onClick={() => signIn('facebook')}>
               <FaFacebookF color="#eba415" />
-              Face Sign In
+              Sign In Face
             </button>
           )}
         </div>
