@@ -30,6 +30,7 @@ export default function SignIn({ providers, csrfToken }) {
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinForm}>
+        <h1>Ignews Sign In</h1>
         <form onSubmit={handleSignIn} >
           <input
             type='text'
@@ -46,9 +47,9 @@ export default function SignIn({ providers, csrfToken }) {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
           />
-          <button type='submit' className={styles.signInButton} >
+          <button type='submit' className={styles.signInButtonEmail} >
             <AiFillLock color="#eba415" />
-            Login with E-mail
+            Sign in
           </button>
         </form>
 
@@ -56,19 +57,19 @@ export default function SignIn({ providers, csrfToken }) {
           {google && (
             <button className={styles.signInButton} onClick={() => signIn('google')}>
               <BsGoogle color="#eba415" />
-              Sign In with Google
+              Sign In Google
             </button>
           )}
           {github && (
             <button className={styles.signInButton} onClick={() => signIn('github')}>
               <FaGithub color="#eba415" />
-              Sign In with GitHub
+              Sign In GitHub
             </button>
           )}
           {facebook && (
             <button className={styles.signInButton} onClick={() => signIn('facebook')}>
               <FaFacebookF color="#eba415" />
-              Sign In with Facebook
+              Face Sign In
             </button>
           )}
         </div>
