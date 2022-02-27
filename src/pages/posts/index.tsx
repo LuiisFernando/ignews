@@ -1,11 +1,23 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as Prismic from '@prismicio/client';
+import { RichText } from 'prismic-dom';
 
 import styles from './styles.module.scss';
 import { createClient } from '../../services/prismic';
 
-export default function Posts() {
+type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+}
+
+interface PostsProps {
+  posts: Post[]
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
@@ -14,35 +26,21 @@ export default function Posts() {
 
       <main className={styles.container}>
         <div className={styles.posts}>
-          <a href="#">
-            <time>12 de março de 2021</time>
-            <strong>Creating a Monorepo with Lerna & Yarn  Workspaces</strong>
-            <p>In this guide, you will learn how to create a Monorepo to manage multiple packages with shared</p>
-          </a>
-          <a href="#">
-            <time>12 de março de 2021</time>
-            <strong>Creating a Monorepo with Lerna & Yarn  Workspaces</strong>
-            <p>In this guide, you will learn how to create a Monorepo to manage multiple packages with shared</p>
-          </a>
-          <a href="#">
-            <time>12 de março de 2021</time>
-            <strong>Creating a Monorepo with Lerna & Yarn  Workspaces</strong>
-            <p>In this guide, you will learn how to create a Monorepo to manage multiple packages with shared</p>
-          </a>
-          <a href="#">
-            <time>12 de março de 2021</time>
-            <strong>Creating a Monorepo with Lerna & Yarn  Workspaces</strong>
-            <p>In this guide, you will learn how to create a Monorepo to manage multiple packages with shared</p>
-          </a>
+          {posts.map(post => (
+            <a href="#" key={post.slug}>
+              <time>{post.updatedAt}</time>
+              <strong>{post.title}</strong>
+              <p>{post.excerpt}</p>
+            </a>
+          ))}
         </div>
       </main>
     </>
   );
 }
 
-export const getStaticProps = async (context) => {
-  const { req, res } = context;
-  var prismic = createClient(context);
+export const getStaticProps: GetStaticProps = async (context: any) => {
+  let prismic = createClient(context);
 
   const response = await prismic.query([
     Prismic.predicate.at('document.type', 'post')
@@ -51,9 +49,22 @@ export const getStaticProps = async (context) => {
     pageSize: 100
   });
 
-  console.log(response);
+  const posts = response.results.map(post => {
+    return {
+      slug: post.uid,
+      title: RichText.asText(post.data.title),
+      excerpt: post.data.content.find(content => content.type === 'paragraph')?.text ?? '',
+      updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      })
+    };
+  })
 
   return {
-    props: {}
+    props: {
+      posts
+    }
   }
 };
