@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import { Header } from '../components/Header';
 import { SessionProvider } from "next-auth/react"
+import { PrismicPreview } from '@prismicio/next'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,9 +14,11 @@ function MyApp({
 
   return (
     <SessionProvider session={session}>
-      <Header />
-      <ToastContainer />
-      <Component {...pageProps} />
+      <PrismicPreview repositoryName={process.env.NEXT_PUBLIC_REPONAME}>
+        <Header />
+        <ToastContainer />
+        <Component {...pageProps} />
+      </PrismicPreview>
     </SessionProvider>
   )
 }
