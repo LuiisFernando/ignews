@@ -12,16 +12,21 @@ import styles from './signin.module.scss';
 export default function SignIn({ providers, csrfToken }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const { google, github, credentials, facebook } = providers;
 
   async function handleSignIn(e) {
     e.preventDefault();
     try {
-      signIn('credentials', {
-        username,
-        password
-      });
+      if (username && password) {
+        signIn('credentials', {
+          username,
+          password
+        });
+      } else {
+        setError('*Preencha as informações de login.')
+      }
     } catch (err) {
       console.log('erro ao logar >> ', err.message);
     }
@@ -32,21 +37,24 @@ export default function SignIn({ providers, csrfToken }) {
       <div className={styles.signinForm}>
         <h1>Ignews Sign In</h1>
         <form onSubmit={handleSignIn} >
-          <input
-            type='text'
-            autoComplete='off'
-            name='username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
-          />
-          <input
-            type='password'
-            name='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="password"
-          />
+          <div className={styles.formContainer}>
+            <input
+              type='text'
+              autoComplete='off'
+              name='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="username"
+            />
+            <input
+              type='password'
+              name='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="password"
+            />
+            <span>{error && error}</span>
+          </div>
           <button type='submit' className={styles.signInButtonEmail} >
             <AiFillLock color="#eba415" />
             Sign in
