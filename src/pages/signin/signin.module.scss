@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
-    padding: 0 90px;
+    padding: 0;
 
     input {
       width: 100%;
@@ -93,7 +93,6 @@
 }
 
 .signInButton {
-  width: 400px;
   height: 3rem;
   border-radius: 3rem;
   background: var(--gray-850);
@@ -103,7 +102,6 @@
   align-items: center;
   justify-content: center;
   color: var(--white);
-  // font-weight: bold;
 
   svg {
       width: 20px;
@@ -129,10 +127,30 @@
   margin-top: 30px;
   display:flex;
   justify-content: center;
+  flex-direction: column;
 
   button {
     & + button {
-      margin-left: 10px;
+      margin-top: 1rem;
+    }
+  }
+}
+
+@media (min-width: 440px) {
+  .signinContainer {
+    form {
+      padding: 0 90px;
+    }
+  }
+
+  .buttonsContainer {
+    flex-direction: row;
+
+    button {
+      & + button {
+        margin-top: 0;
+        margin-left: 10px;
+      }
     }
   }
 }

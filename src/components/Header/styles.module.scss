@@ -12,10 +12,11 @@
     display: flex;
     align-items: center;
 
-    nav {
-        margin-left: 5rem;
-        height: 5rem;
+    img {
+        display: none;
+    }
 
+    nav {
         a {
             display: inline-block;
             position: relative;
@@ -55,5 +56,18 @@
 
     button {
         margin-left: auto;
+    }
+}
+
+@media (min-width: 440px) {
+    .headerContent {
+        img {
+            display: flex;
+        }
+
+        nav {
+            margin-left: 5rem;
+            height: 5rem;
+        }
     }
 }
