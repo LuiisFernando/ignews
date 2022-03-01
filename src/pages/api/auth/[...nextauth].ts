@@ -132,6 +132,7 @@ export default NextAuth({
   },
   pages: {
     signIn: '/signin',
-    error: '/signin/signin-error'
+    error: '/signin/signin-error',
+
   }
 })

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { GetServerSideProps, GetStaticProps, GetServerSidePropsContext } from 'next';
 import { FaGithub, FaFacebookF } from 'react-icons/fa';
 import { BsGoogle } from 'react-icons/bs';
 import { AiFillLock } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-
 
 import { getProviders, signIn, getSession, getCsrfToken, } from 'next-auth/react';
 
@@ -87,7 +85,6 @@ export default function SignIn({ providers, csrfToken }) {
   );
 }
 
-
 export const getServerSideProps = async (context) => {
 
   const { req, res } = context;
@@ -112,6 +109,5 @@ export const getServerSideProps = async (context) => {
       providers,
       csrfToken,
     },
-    // revalidate: 60 * 60 * 24
   }
 }
