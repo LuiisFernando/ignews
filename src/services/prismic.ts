@@ -5,10 +5,10 @@ import { enableAutoPreviews } from '@prismicio/next'
 const repositoryName = 'ignewsluis';
 const endpoint = prismic.getEndpoint(repositoryName)
 
-export const createClient = ({ req }) => {
+export const createClient = () => {
   const client = prismic.createClient(endpoint, { accessToken: process.env.PRISMIC_ACESS_TOKEN })
 
-  enableAutoPreviews({ client, req })
+  // enableAutoPreviews({ client, req })
 
   return client
 }

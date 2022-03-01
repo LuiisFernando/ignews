@@ -46,7 +46,7 @@ export default function Posts({ posts }: PostsProps) {
 }
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
-  let prismic = createClient(context);
+  let prismic = createClient();
 
   const response = await prismic.query([
     Prismic.predicate.at('document.type', 'post')

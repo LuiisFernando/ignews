@@ -1,5 +1,7 @@
-import { useSession, signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+
 
 import { api } from '../../services/api';
 import { getStripeJs } from '../../services/stripe-js';
@@ -12,11 +14,16 @@ interface SubscrieButtonProps {
 export function SubscribeButton({ priceId }: SubscrieButtonProps) {
 
     const { data: session } = useSession();
-
+    const router = useRouter();
 
     async function handleSubscribe() {
         if (!session) {
             toast.warning('Para fazer o subscribe é necessário fazer o login primeiro.');
+            return;
+        }
+
+        if (session.activeSubscription) {
+            router.push('/posts');
             return;
         }
 
@@ -28,7 +35,7 @@ export function SubscribeButton({ priceId }: SubscrieButtonProps) {
 
             await stripe.redirectToCheckout({ sessionId });
         } catch (err) {
-            alert(err.message);
+            toast.warning("Ocorreu um erro ao efetuar o subscribe!");
         }
     }
 

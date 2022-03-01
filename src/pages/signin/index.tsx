@@ -3,6 +3,7 @@ import { GetServerSideProps, GetStaticProps, GetServerSidePropsContext } from 'n
 import { FaGithub, FaFacebookF } from 'react-icons/fa';
 import { BsGoogle } from 'react-icons/bs';
 import { AiFillLock } from 'react-icons/ai';
+import { toast } from 'react-toastify';
 
 
 import { getProviders, signIn, getSession, getCsrfToken, } from 'next-auth/react';
@@ -28,7 +29,7 @@ export default function SignIn({ providers, csrfToken }) {
         setError('*Preencha as informações de login.')
       }
     } catch (err) {
-      console.log('erro ao logar >> ', err.message);
+      toast.warning("Ocorreu um erro ao efetuar o login!");
     }
   }
 
@@ -87,11 +88,10 @@ export default function SignIn({ providers, csrfToken }) {
 }
 
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
 
   const { req, res } = context;
   const session = await getSession({ req });
-
 
   if (session && res && session.user) {
     res.writeHead(302, {
@@ -112,6 +112,6 @@ export const getStaticProps = async (context) => {
       providers,
       csrfToken,
     },
-    revalidate: 60 * 60 * 24
+    // revalidate: 60 * 60 * 24
   }
 }
