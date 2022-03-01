@@ -54,7 +54,7 @@ export async function saveSubscription(
     }
 
   } catch (err) {
-    console.log('Erro ao salvar subscricao')
+    console.log('Error while trying to save subbscription.')
   }
 
 }

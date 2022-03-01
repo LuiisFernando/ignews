@@ -26,10 +26,10 @@ export default function SignIn({ providers, csrfToken }) {
           password
         });
       } else {
-        setError('*Preencha as informações de login.')
+        setError('*Please insert the credentials to log in')
       }
     } catch (err) {
-      toast.warning("Ocorreu um erro ao efetuar o login!");
+      toast.warning("Ops, There's something wrong to login!");
     }
   }
 

@@ -18,7 +18,7 @@ export function SubscribeButton({ priceId }: SubscrieButtonProps) {
 
     async function handleSubscribe() {
         if (!session) {
-            toast.warning('Para fazer o subscribe é necessário fazer o login primeiro.');
+            toast.warning('To subscribe you need to login first.');
             return;
         }
 
@@ -35,7 +35,7 @@ export function SubscribeButton({ priceId }: SubscrieButtonProps) {
 
             await stripe.redirectToCheckout({ sessionId });
         } catch (err) {
-            toast.warning("Ocorreu um erro ao efetuar o subscribe!");
+            toast.warning("Ops, There's something wrong to subscribe!");
         }
     }
 
