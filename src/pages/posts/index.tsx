@@ -52,10 +52,14 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     Prismic.predicate.at('document.type', 'post')
   ], {
     fetch: ['post.title', 'post.content'],
-    pageSize: 100
+    pageSize: 100,
+    orderings: {
+      field: 'document.last_publication_date',
+      direction: 'desc'
+    }
   });
 
-  const posts = response.results.map(post => {
+  let posts = response.results.map(post => {
     return {
       slug: post.uid,
       title: RichText.asText(post.data.title),
@@ -66,7 +70,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         year: 'numeric'
       })
     };
-  })
+  });
 
   return {
     props: {
