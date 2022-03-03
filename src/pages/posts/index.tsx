@@ -45,7 +45,7 @@ export default function Posts({ posts }: PostsProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async () => {
   let prismic = createClient();
 
   const response = await prismic.query([
